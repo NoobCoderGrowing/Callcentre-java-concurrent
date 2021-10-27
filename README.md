@@ -1,2 +1,2 @@
 Directly run Callcentre1, Callcentre2, Callcentre3. 
-There are no external dependencies
+There isn't any external dependency.
