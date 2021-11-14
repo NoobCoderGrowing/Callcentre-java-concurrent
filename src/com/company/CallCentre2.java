@@ -17,8 +17,6 @@ public class CallCentre2 {
         return ++finishedCallNum;
     }
 
-
-
     public static class Line{
         // name of the line
         private char name;
