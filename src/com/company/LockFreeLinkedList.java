@@ -1,6 +1,9 @@
 package com.company;
 import java.util.concurrent.atomic.AtomicMarkableReference;
 
+//I referred to this guy's implementation (https://github.com/pramalhe/ConcurrencyFreaks/blob/master/Java/com/concurrencyfreaks/list/HarrisAMRLinkedList.java).
+//But he made some same mistakes with the autor of The Art of Multi-proccessor Programing
+
 public class LockFreeLinkedList<E>{
     final Node<E> head;
     final Node<E> tail;
@@ -30,7 +33,7 @@ public class LockFreeLinkedList<E>{
         }
     }
 
-    // other than returning pred and curr, find method also deletes any removed node it encounter
+    // other than returning pred and curr, find method also deletes any removed node it encounters
     public Window find (E item) {
         Node<E> pred = null;
         Node<E> curr = null;
