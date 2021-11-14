@@ -92,6 +92,7 @@ public class LockFreeLinkedList<E>{
         }
     }
 
+    //remove method doesn't actually delete node, it just marks the node
     public boolean remove(E item) {
         while (true) {
             final Window<E> window = find(item);
@@ -105,6 +106,8 @@ public class LockFreeLinkedList<E>{
         }
     }
 
+    //contains iterate over the list and return true when finding a node with its key value same with
+    //item.hashCode and its mark is false
     public boolean contains(E item) {
         boolean[] marked = {false};
         Node<E> pred = head;
