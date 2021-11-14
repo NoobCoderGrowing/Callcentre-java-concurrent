@@ -15,7 +15,6 @@ public class LockFreeLinkedList<E>{
         public Node(E item){
             this.key = item.hashCode();
             this.item = item;
-            this.next = new AtomicMarkableReference<Node<E>>(null, false);
         }
     }
 
