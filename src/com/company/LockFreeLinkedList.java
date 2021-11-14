@@ -63,7 +63,7 @@ public class LockFreeLinkedList<E>{
                     }
                     succ=curr.next.getReference();
                 }
-                if (curr.hashCode() >= item.hashCode()) {
+                if (curr.key >= item.hashCode()) {
                     return new Window<E>(pred, curr);
                 }
                 pred = curr;
