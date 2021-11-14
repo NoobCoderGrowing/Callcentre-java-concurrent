@@ -30,8 +30,7 @@ public class LockFreeLinkedList<E>{
         }
     }
 
-
-
+    // other than returning pred and curr, find method also deletes any removed node it encounter
     public Window find (E item) {
         Node<E> pred = null;
         Node<E> curr = null;
@@ -48,7 +47,7 @@ public class LockFreeLinkedList<E>{
                 pred.next.get(marked);// put current node mark to marked
                 succ = curr.next.getReference();
                 while(!marked[0]) { // check current node mark
-                    /* current node is marked, so its expected mark should be true and we linke pred.next to
+                    /* current node is marked, so its expected mark should be true and we link pred.next to
                     succ */
                     if(!pred.next.compareAndSet(curr,succ,true,false)){
                         //if return false means other threads changed pred.next, so we start over
@@ -66,6 +65,9 @@ public class LockFreeLinkedList<E>{
                 }
                 pred = curr;
                 curr = succ;
+                if(curr == tail){ // every time curr advances, test if reaching the end
+                    return new Window<E>(pred, curr);
+                }
             }
         }
     }
@@ -96,8 +98,9 @@ public class LockFreeLinkedList<E>{
             final Node<E> pred = window.pred;
             final Node<E> curr = window.curr;
             if (curr.key != item.hashCode()) {
-                return false;
+                return false; // here return false means this list doesn't contain the item
             }
+            //here we try to delete item simply by marking it
             return pred.next.compareAndSet(curr, curr, false, true);
         }
     }
